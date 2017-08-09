@@ -103,15 +103,3 @@ ul.addEventListener('click', (e) => {
     } 
   }
 });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
