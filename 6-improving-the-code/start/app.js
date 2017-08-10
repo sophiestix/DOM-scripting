@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-
   function createLI(text) {
     function createElement(elementName, property, value) {
       const element = document.createElement(elementName);
@@ -83,27 +82,41 @@ document.addEventListener('DOMContentLoaded', () => {
       const button = e.target;
       const li = button.parentNode;
       const ul = li.parentNode;
-      if (button.textContent === 'remove') {
-        ul.removeChild(li);
-      } else if (button.textContent === 'edit') {
-        // console.log('edit');
-        const span = li.firstElementChild;
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = span.textContent;
-        li.insertBefore(input, span);
-        li.removeChild(span);
-        button.textContent = 'save';
-      } else if (button.textContent === 'save') {
-        // console.log('edit');
-        const input = li.firstElementChild;
-        const span = document.createElement('span');
-        span.textContent = input.value;
-        li.insertBefore(span, input);
-        li.removeChild(input);
-        button.textContent = 'edit';
-      } 
+            const action = button.textContent;
+      const nameActions ={
+        remove: () => {
+          ul.removeChild(li);
+        },
+        edit: () => {
+          const span = li.firstElementChild;
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.value = span.textContent;
+          li.insertBefore(input, span);
+          li.removeChild(span);
+          button.textContent = 'save';
+        },
+        save: () => {
+          const input = li.firstElementChild;
+          const span = document.createElement('span');
+          span.textContent = input.value;
+          li.insertBefore(span, input);
+          li.removeChild(input);
+          button.textContent = 'edit';
+        }
+      };
+
+      //select and run action in button's name
+      nameActions[action](); // the names of the buttons match the names of the properties, 
+      // so the function will be directly accessed from the object through the 'action' string. 
+      // so we don't need the if statement here:
+      // if (action === 'remove') {
+      //   nameActions.remove();
+      // } else if (action === 'edit') {
+      //   nameActions.edit();
+      // } else if (action === 'save') {
+      //   nameActions.save();
+      // } 
     }
   });
-  
 });
