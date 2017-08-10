@@ -61,6 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const text = input.value;
     input.value = '';
+    for (i=0; i < ul.children.length; i++) {
+      if (text.toUpperCase == ul.children[i].children[0].textContent.toUpperCase) {
+        alert("That person has already been invited.");
+        return;
+      }
+    }
     const li = createLI(text);
     ul.appendChild(li);
   });
